@@ -4,20 +4,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
+
 
 @Component
 public class MusicPlayer {
-    private Music music1;
-    private Music music2;
+    private RockMusic rockMusic;
+    private MetalMusic metalMusic;
 
-    public MusicPlayer(@Qualifier("rockMusic") Music music1, @Qualifier("metalMusic") Music music2) {
-        this.music1 = music1;
-        this.music2 = music2;
+    @Autowired
+    public MusicPlayer(RockMusic rockMusic, MetalMusic metalMusic) {
+        this.rockMusic = rockMusic;
+        this.metalMusic = metalMusic;
     }
 
-    public String playMusic() {
-        return "Playing: " + music1.getSong() + "; " + music2.getSong();
+    public String playMusic(MusicGenres genre) {
+        List<String> songs;
+        switch (genre) {
+            case ROCK -> {
+                songs = rockMusic.getSongs();
+                return songs.get((int) (Math.random() * songs.size()));
+            }
+            case METAL -> {
+                songs = metalMusic.getSongs();
+                return songs.get((int) (Math.random() * songs.size()));
+            }
+            default -> {
+                return null;
+            }
+        }
     }
 }
