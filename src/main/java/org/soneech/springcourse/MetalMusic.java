@@ -2,9 +2,7 @@ package org.soneech.springcourse;
 
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 @Component
 public class MetalMusic extends Music {
