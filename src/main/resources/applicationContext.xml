@@ -11,21 +11,30 @@
 
     <bean
         id="classicMusic"
-        class="org.soneech.springcourse.ClassicalMusic">
-    </bean>
-    <bean
-        id="rockMusic"
-        class="org.soneech.springcourse.RockMusic">
-    </bean>
-    <bean
-        id="metalMusic"
-        class="org.soneech.springcourse.MetalMusic">
+        class="org.soneech.springcourse.ClassicalMusic"
+        init-method="doInit"
+        destroy-method="doDestroy">
     </bean>
 
     <bean
+        id="rockMusic"
+        class="org.soneech.springcourse.RockMusic"
+        init-method="doInit"
+        destroy-method="doDestroy">
+    </bean>
+    <bean
+        id="metalMusic"
+        class="org.soneech.springcourse.MetalMusic"
+        init-method="doInit"
+        destroy-method="doDestroy">
+    </bean>
+
+    <!-- for beans with scope 'prototype' destroy-method isn't called -->
+    <bean
         id="musicPlayer"
         class="org.soneech.springcourse.MusicPlayer"
-        scope="prototype">
+        scope="prototype"
+        init-method="doInit">
 
         <!-- DI - dependency injection -->
 

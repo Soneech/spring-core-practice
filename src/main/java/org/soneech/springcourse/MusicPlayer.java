@@ -30,4 +30,12 @@ public class MusicPlayer {
             System.out.println(music.getSong());
         }
     }
+
+    public void doInit() {
+        System.out.println("Doing music player initialization...");
+    }
+
+    public void doDestroy() {  // scope 'prototype'!
+        System.out.println("Doing music player destruction...");
+    }
 }
