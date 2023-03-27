@@ -1,6 +1,7 @@
 package org.soneech.springcourse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -8,20 +9,15 @@ import java.util.List;
 
 @Component
 public class MusicPlayer {
-    private RockMusic rockMusic;
-    private MetalMusic metalMusic;
+    private Music music1;
+    private Music music2;
 
-    @Autowired
-    public MusicPlayer(RockMusic rockMusic, MetalMusic metalMusic) {
-        this.rockMusic = rockMusic;
-        this.metalMusic = metalMusic;
+    public MusicPlayer(@Qualifier("rockMusic") Music music1, @Qualifier("metalMusic") Music music2) {
+        this.music1 = music1;
+        this.music2 = music2;
     }
 
     public String playMusic() {
-        return "Playing: " + rockMusic.getSong() + "; " + metalMusic.getSong();
-    }
-
-    public void doInit() {
-        System.out.println("Doing music player initialization...");
+        return "Playing: " + music1.getSong() + "; " + music2.getSong();
     }
 }
