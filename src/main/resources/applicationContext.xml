@@ -7,45 +7,5 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:property-placeholder location="classpath:musicPlayer.properties"/>
-
-    <bean
-        id="classicMusic"
-        class="org.soneech.springcourse.ClassicalMusic"
-        init-method="doInit"
-        destroy-method="doDestroy">
-    </bean>
-
-    <bean
-        id="rockMusic"
-        class="org.soneech.springcourse.RockMusic"
-        init-method="doInit"
-        destroy-method="doDestroy">
-    </bean>
-    <bean
-        id="metalMusic"
-        class="org.soneech.springcourse.MetalMusic"
-        init-method="doInit"
-        destroy-method="doDestroy">
-    </bean>
-
-    <!-- for beans with scope 'prototype' destroy-method isn't called -->
-    <bean
-        id="musicPlayer"
-        class="org.soneech.springcourse.MusicPlayer"
-        scope="prototype"
-        init-method="doInit">
-
-        <!-- DI - dependency injection -->
-
-        <property name="volume" value="${musicPlayer.volume}"/>
-
-        <property name="musicList">
-            <list>
-                <ref bean="classicMusic"/>
-                <ref bean="rockMusic"/>
-                <ref bean="metalMusic"/>
-            </list>
-        </property>
-    </bean>
+    <context:component-scan base-package="org.soneech.springcourse"/>
 </beans>

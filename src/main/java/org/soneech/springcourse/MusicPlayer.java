@@ -1,41 +1,27 @@
 package org.soneech.springcourse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class MusicPlayer {
-    private List<Music> musicList = new ArrayList<>();
-    private int volume;
+    private RockMusic rockMusic;
+    private MetalMusic metalMusic;
 
-    public MusicPlayer() {}
-
-    public List<Music> getMusicList() {
-        return musicList;
+    @Autowired
+    public MusicPlayer(RockMusic rockMusic, MetalMusic metalMusic) {
+        this.rockMusic = rockMusic;
+        this.metalMusic = metalMusic;
     }
 
-    public void setMusicList(List<Music> musicList) {
-        this.musicList.addAll(musicList);
-    }
-
-    public int getVolume() {
-        return volume;
-    }
-
-    public void setVolume(int volume) {
-        this.volume = volume;
-    }
-
-    public void playMusic() {
-        for (Music music: musicList) {
-            System.out.println(music.getSong());
-        }
+    public String playMusic() {
+        return "Playing: " + rockMusic.getSong() + "; " + metalMusic.getSong();
     }
 
     public void doInit() {
         System.out.println("Doing music player initialization...");
-    }
-
-    public void doDestroy() {  // scope 'prototype'!
-        System.out.println("Doing music player destruction...");
     }
 }
