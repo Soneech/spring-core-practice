@@ -1,12 +1,11 @@
-package org.soneech.springcourse;
+package org.soneech.springcourse.genres;
 
-import org.springframework.stereotype.Component;
+import org.soneech.springcourse.Music;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.util.Arrays;
 
-@Component
 public class RockMusic extends Music {
     @PostConstruct
     public void doInit() {
@@ -20,7 +19,9 @@ public class RockMusic extends Music {
 
     public RockMusic() {
         songs.addAll(Arrays.asList(
-                "Pain: Follow me", "The Offspring: Future is now", "Billy Talent: Dead silence"
+                "Pain, Follow me",
+                "The Offspring, Future is now",
+                "Billy Talent, Dead silence"
         ));
     }
 }

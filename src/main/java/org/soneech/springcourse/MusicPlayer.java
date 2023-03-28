@@ -1,27 +1,21 @@
 package org.soneech.springcourse;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 
-@Component
-@Scope("prototype")
 public class MusicPlayer {
     @Value("${musicPlayer.name}")
     private String name;
     @Value("${musicPlayer.volume}")
     private String volume;
-    private RockMusic rockMusic;
-    private MetalMusic metalMusic;
+    List<Music> musicList = new ArrayList<>();
 
-    @Autowired
-    public MusicPlayer(RockMusic rockMusic, MetalMusic metalMusic) {
-        this.rockMusic = rockMusic;
-        this.metalMusic = metalMusic;
+    public MusicPlayer(List<Music> music) {
+        this.musicList.addAll(music);
     }
 
     public String getName() {
@@ -32,20 +26,12 @@ public class MusicPlayer {
         return volume;
     }
 
-    public String playMusic(MusicGenres genre) {
-        List<String> songs;
-        switch (genre) {
-            case ROCK -> {
-                songs = rockMusic.getSongs();
-                return songs.get((int) (Math.random() * songs.size()));
-            }
-            case METAL -> {
-                songs = metalMusic.getSongs();
-                return songs.get((int) (Math.random() * songs.size()));
-            }
-            default -> {
-                return null;
-            }
-        }
+    public String playMusic() {
+        Random random = new Random();
+
+        List<String> songs = musicList.get(random.nextInt(musicList.size())).getSongs();
+        String song = songs.get(random.nextInt(songs.size()));
+
+        return "Playing: '" + song + "', with volume " + this.volume;
     }
 }
